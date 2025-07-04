@@ -9,19 +9,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mydating.dating.entity.User;
-import com.mydating.dating.repository.UserRepository;
 import com.mydating.dating.service.UserService;
 
 @RestController
 public class UserController {
 
-    private final UserRepository userRepository;
 	@Autowired
 	UserService userService;
 
-    UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 	
 	@PostMapping("/users")
 	public ResponseEntity<?> saveUser(@RequestBody User user){
@@ -63,6 +58,16 @@ public class UserController {
 	@GetMapping("/users/phone/{phone}")
 	public ResponseEntity<?> findUserByPhone(@PathVariable long phone){
 		return userService.findUserBypPhone(phone);
+	}
+	
+	@GetMapping("/users/search/name/{letters}")
+	public ResponseEntity<?> searchUsersByLettersOfName(@PathVariable String letters){
+		return userService.searchUsersByLettersOfName(letters);
+	}
+	
+	@GetMapping("/users/search/email/{letters}")
+	public ResponseEntity<?> searchUsersByLetterOfEmail(@PathVariable String letters){
+		return userService.searchUsersByLetterOfEmail(letters);
 	}
 	
 }

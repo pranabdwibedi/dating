@@ -46,4 +46,12 @@ public class UserDao {
 	public Optional<User> findUserByPhone(long phone) {
 		return userRepository.findByPhone(phone);
 	}
+
+	public List<User> searchUsersByLettersOfName(String letters) {
+		return userRepository.searchByName(letters);
+	}
+
+	public List<User> searchUsersByLettersOfEmail(String letters) {
+		return userRepository.searchUsersByLettersOfEmail(letters);
+	}
 }

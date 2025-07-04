@@ -105,4 +105,18 @@ public class UserService {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid phone number! Unable to find user");
 		return ResponseEntity.status(HttpStatus.OK).body(optional.get());
 	}
+
+	public ResponseEntity<?> searchUsersByLettersOfName(String letters) {
+		List<User> users = userDao.searchUsersByLettersOfName("%"+letters+"%");
+		if(users.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Couldn't find any user with letters : "+letters);
+		return ResponseEntity.status(HttpStatus.OK).body(users);
+	}
+
+	public ResponseEntity<?> searchUsersByLetterOfEmail(String letters) {
+		List<User> users = userDao.searchUsersByLettersOfEmail("%"+letters+"%");
+		if(users.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Couldn't find any user with letters : "+letters);
+		return ResponseEntity.status(HttpStatus.OK).body(users);
+	}
 }
