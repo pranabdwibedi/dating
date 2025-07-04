@@ -30,4 +30,20 @@ public class UserDao {
 	public Optional<User> findById(int id) {
 		return userRepository.findById(id);
 	}
+	
+	public List<User> findUserByName(String name){
+		return userRepository.findByName(name);
+	}
+
+	public List<User> findUserByAge(int age) {
+		return userRepository.findByAge(age);
+	}
+
+	public Optional<User> findUserByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+
+	public Optional<User> findUserByPhone(long phone) {
+		return userRepository.findByPhone(phone);
+	}
 }

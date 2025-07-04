@@ -77,4 +77,32 @@ public class UserService {
 			result.add(matchingUsers.get(i));
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
+
+	public ResponseEntity<?> findUserByName(String name) {
+		List<User> users = userDao.findUserByName(name);
+		if(users.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid name! Unable to find ");
+		return ResponseEntity.status(HttpStatus.OK).body(users);
+	}
+
+	public ResponseEntity<?> findUserByAge(int age) {
+		List<User> users = userDao.findUserByAge(age);
+		if(users.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No user found with this age");
+		return ResponseEntity.status(HttpStatus.OK).body(users);
+	}
+
+	public ResponseEntity<?> findUserByEmail(String email) {
+		Optional<User> optional = userDao.findUserByEmail(email);
+		if(optional.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid email! User not found");
+		return ResponseEntity.status(HttpStatus.OK).body(optional.get());
+	}
+
+	public ResponseEntity<?> findUserBypPhone(long phone) {
+		Optional<User> optional = userDao.findUserByPhone(phone);
+		if(optional.isEmpty())
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid phone number! Unable to find user");
+		return ResponseEntity.status(HttpStatus.OK).body(optional.get());
+	}
 }
